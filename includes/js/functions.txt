@@ -1,0 +1,111 @@
+function insert() {
+database.ref().child('cataclysm').set('');
+window.alert("done");
+}
+function remove() {
+database.ref().remove();
+window.alert("done");
+}
+
+function writeUserData(userId, name, email) {
+  firebase.database().ref('users/ali').set({
+    username: 'nssame',
+    email: 'emasssil'
+  });
+  window.alert("done");
+}
+
+function collection() {
+  db.collection("users").doc("LA").set({
+      name: "Los Angeles",
+      state: "CA",
+      country: "USA"
+  })
+  .then(() => {
+      console.log("Document successfully written!");
+  })
+  .catch((error) => {
+      console.error("Error writing document: ", error);
+  });
+  window.alert("done");
+}
+
+function collectiond() {
+  db.collection("users").doc("LA").delete().then(() => {
+      console.log("Document successfully deleted!");
+  }).catch((error) => {
+      console.error("Error removing document: ", error);
+  });
+  window.alert("done");
+}
+
+function upload() {
+  var metadata = {
+    contentType: 'image/jpeg'
+  };
+  var image = document.getElementById("image").files[0];
+  var imagename = image.name;
+  var uploadTask = storageRef.child('images/' + imagename).put(file, metadata);
+  uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+    (snapshot) => {
+      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('Upload is ' + progress + '% done');
+      switch (snapshot.state) {
+        case firebase.storage.TaskState.PAUSED:
+          console.log('Upload is paused');
+          break;
+        case firebase.storage.TaskState.RUNNING:
+          console.log('Upload is running');
+          break;
+      }
+    },
+    (error) => {
+      switch (error.code) {
+        case 'storage/unauthorized':
+          break;
+        case 'storage/canceled':
+          break;
+        case 'storage/unknown':
+          break;
+      }
+    },
+    () => {
+      uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+        console.log('File available at', downloadURL);
+      });
+    }
+  );
+}
+
+<tr><td>ID</td><td>Mark</td><td>Otto</td><td>online</td><td><button type="button" class="btn btn-info" onclick="">Edit</button></td><td><button type="button" class="btn btn-danger" onclick="()">Remove</button></td></tr>
+
+
+
+
+
+<script type="text/javascript">
+/*var db = firebase.firestore();
+var button = document.createElement('button');
+document.write('<div class="container"> <table class="table caption-top" id="table123"><thead> <tr><th scope="col" id="deleteuser">Username</th><th scope="col">Station</th></tr></thead><tbody></tbody></table></div>');
+
+db.collection("users").get()
+    .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          console.log("p");
+            console.log(doc.id, " => ", doc.data());
+var row = document.getElementById("table123").insertRow();
+var cell1 = row.insertCell(0);
+var cell2 = row.insertCell(1);
+
+cell1.innerHTML = doc.data().username;
+cell2.innerHTML = doc.data().station;
+});
+        console.log("hey");
+    })
+
+    .catch((error) => {
+        console.log("Error getting documents: ", error);
+    });*/
+
+
+</script>
